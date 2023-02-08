@@ -14,15 +14,17 @@ const Login = () => {
   const [signInWithGoogle] = useSignInWithGoogle(auth);
   const responseGoogle = async () => {
     const x = await signInWithGoogle();
-    localStorage.setItem("user", JSON.stringify(x.user));
     const { displayName: name, uid: googleId, photoURL: imageUrl } = x.user;
+    x.user = { ...x.user, name, googleId, imageUrl };
+    localStorage.setItem("user", JSON.stringify(x.user));
+
     const doc = {
       _id: googleId,
       _type: "user",
       userName: name,
       image: imageUrl,
     };
-    console.log(doc);
+    console.log(x.user);
     client.createIfNotExists(doc).then(() => {
       navigate("/", { replace: true });
     });
