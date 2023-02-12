@@ -25,7 +25,7 @@ const UserProfile = () => {
   const [activeBtn, setActiveBtn] = useState("created");
   const navigate = useNavigate();
   const { userId } = useParams();
-  const [signOut, loading, error] = useSignOut(auth);
+  const [signOut] = useSignOut(auth);
 
   const User =
     localStorage.getItem("user") !== "undefined"
