@@ -17,9 +17,9 @@ const Home = () => {
     const query = userQuery(userInfo?.googleId);
 
     client.fetch(query).then((data) => {
-      setUser(data);
+      setUser(data[0]);
     });
-  }, [userInfo]);
+  }, []);
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
   });
