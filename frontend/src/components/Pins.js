@@ -124,7 +124,7 @@ const Pin = ({ pin }) => {
               ) : undefined}
               {(postedBy?._id === user?.googleId ||
                 user?.googleId === `EVQcOyfSwRVa3wqncm5PJlXiYdD3` ||
-                user.googleId === `89TlGpL7VlUpjlQm5bvjAMTwYn83`) && (
+                user?.googleId === `89TlGpL7VlUpjlQm5bvjAMTwYn83`) && (
                 <button
                   type="button"
                   onClick={(e) => {
