@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { SideBar, UserProfile } from "../components";
 import Pins from "./Pins";
 import logo from "../assets/logo.png";
@@ -12,8 +12,10 @@ const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
   const userInfo = fetchUser();
   useEffect(() => {
+    // console.log("userInfo", userInfo);
     const query = userQuery(userInfo?.googleId);
 
     client.fetch(query).then((data) => {

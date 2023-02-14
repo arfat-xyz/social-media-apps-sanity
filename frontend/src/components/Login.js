@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
@@ -6,7 +6,7 @@ import logo from "../assets/logowhite.png";
 import { client } from "../client";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../firebaseConfig";
-
+import { fetchUser } from "../utils/fetchUser";
 // import { client } from "../client";
 
 const Login = () => {
@@ -14,22 +14,27 @@ const Login = () => {
   const [signInWithGoogle] = useSignInWithGoogle(auth);
   const responseGoogle = async () => {
     const x = await signInWithGoogle();
+    console.log(x);
     const { displayName: name, uid: googleId, photoURL: imageUrl } = x.user;
     x.user = { ...x.user, name, googleId, imageUrl };
     localStorage.setItem("user", JSON.stringify(x.user));
 
     const doc = {
       _id: googleId,
+      googleId,
       _type: "user",
       userName: name,
       image: imageUrl,
     };
-    console.log(x.user);
+    // console.log(x.user);
     client.createIfNotExists(doc).then(() => {
       navigate("/", { replace: true });
     });
   };
-
+  const userInfo = fetchUser();
+  useEffect(() => {
+    if (userInfo?.googleId) return navigate("/");
+  }, [userInfo, navigate]);
   return (
     <div className="flex justify-start items-center flex-col h-screen">
       <div className=" relative w-full h-full">

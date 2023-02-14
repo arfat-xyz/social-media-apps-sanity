@@ -27,6 +27,8 @@ const UserProfile = () => {
   const { userId } = useParams();
   const [signOut] = useSignOut(auth);
 
+  // console.log(userId === user?.googleId, userId, user);
+
   const User =
     localStorage.getItem("user") !== "undefined"
       ? JSON.parse(localStorage.getItem("user"))
@@ -84,7 +86,7 @@ const UserProfile = () => {
             {user?.userName}
           </h1>
           <div className="absolute top-0 z-1 right-0 p-2">
-            {userId === user?.googleId && (
+            {(userId === user?.googleId || userId === user?._id) && (
               <button
                 type="button"
                 className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
