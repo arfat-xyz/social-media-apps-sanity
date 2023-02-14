@@ -41,8 +41,8 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           <>
             <Link
               to="/login"
-              className="bg-black text-white 
-               rounded-lg w-20 h-12 md:w-28 md:h-12 flex justify-center items-center"
+              className="bg-black text-white hidden md:flex
+               rounded-lg w-20 h-12 md:w-28 md:h-12 justify-center items-center"
             >
               <AiOutlineLogin className="mr-2" /> Login
             </Link>

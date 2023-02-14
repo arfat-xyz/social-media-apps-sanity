@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { HiMenu } from "react-icons/hi";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineLogin } from "react-icons/ai";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { SideBar, UserProfile } from "../components";
 import Pins from "./Pins";
@@ -12,7 +12,6 @@ const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
-  const navigate = useNavigate();
   const userInfo = fetchUser();
   useEffect(() => {
     // console.log("userInfo", userInfo);
@@ -41,13 +40,35 @@ const Home = () => {
             <Link to="/">
               <img src={logo} alt="logo" className="w-28" />
             </Link>
-            <Link to={`user-profile/${user?._id}`}>
+            {/* <Link to={`user-profile/${user?._id}`}>
               <img
                 src={user?.image}
                 alt="user-pic"
                 className="w-9 h-9 rounded-full "
               />
-            </Link>
+            </Link> */}
+            {user ? (
+              <>
+                {" "}
+                <Link to={`user-profile/${user?._id}`}>
+                  <img
+                    src={user?.image}
+                    alt="user-pic"
+                    className="w-9 h-9 rounded-full "
+                  />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="bg-black text-white 
+                 rounded-lg w-14 h-8 text-xs md:text-2xl md:w-28 md:h-12 flex justify-center items-center"
+                >
+                  <AiOutlineLogin className="mr-2" /> Login
+                </Link>
+              </>
+            )}
           </div>
           {toggleSidebar && (
             <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
