@@ -14,7 +14,6 @@ const Home = () => {
   const scrollRef = useRef(null);
   const userInfo = fetchUser();
   useEffect(() => {
-    // console.log("userInfo", userInfo);
     const query = userQuery(userInfo?.googleId);
 
     client.fetch(query).then((data) => {

@@ -27,13 +27,6 @@ const UserProfile = () => {
   const { userId } = useParams();
   const [signOut] = useSignOut(auth);
 
-  // console.log(userId === user?.googleId, userId, user);
-
-  const User =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user"))
-      : localStorage.clear();
-
   useEffect(() => {
     const query = userQuery(userId);
     client.fetch(query).then((data) => {
